@@ -1,6 +1,0 @@
-List<Student> students;
-double total = 0;
-for(student s : students){
-    total += s.averageGradeStud();
-}
-double averageForAll = total / students.size();
