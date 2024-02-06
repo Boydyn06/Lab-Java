@@ -1,0 +1,61 @@
+java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+
+public class Main {
+    public static void main(String[] args) {
+        //aici faci listele, modfici doar numele adica _AQuality, _BQuality, _CQuality
+        List<Stupi> _AQuality = new ArrayList<>();
+        List<Stupi> _BQuality = new ArrayList<>();
+        List<Stupi> _CQuality = new ArrayList<>();
+        // modifici doar numele la csv ala din ghilimele
+        String csvFile= "4LF623.csv";
+        String csvSplitBy = ",";
+        String line;
+
+        try(BufferedReader br = new BufferedReader(new FileReader(csvFile))){
+            br.readLine();
+            while ((line=br.readLine())!=null){
+                String [] date = line.split(csvSplitBy);
+                int id = Integer.parseInt(date[0].trim());
+                String denumire = date[1].trim();
+                String specie = date[2].trim();
+                int anul_fondarii = Integer.parseInt(date[3].trim());
+                String locatie = date[4].trim();
+                int nr_stupi = Integer.parseInt(date[5].trim());
+                int productie_miere_kg = Integer.parseInt(date[6].trim());
+                String calitate_miere = date[7].trim();
+                Double pret_kg = Double.parseDouble(date[8].trim());
+
+
+                Stupi stupi = new Stupi (id, denumire, specie, anul_fondarii, locatie, nr_stupi, productie_miere_kg, calitate_miere,pret_kg);
+
+                //aici trebuie sortarea
+                if ("A".equals(stupi.getCALITATE_MIERE())){
+                    _AQuality.add(stupi);
+                } else if ("B".equals(stupi.getCALITATE_MIERE())) {
+                    _BQuality.add(stupi);
+                } else if ("C".equals(stupi.getCALITATE_MIERE())) {
+                    _CQuality.add(stupi);
+                }
+
+            }
+        }
+        catch (IOException e){
+            e.printStackTrace(); //asta scris neaparat
+        //pana aici e ex 1
+        }
+        //ex 2
+        System.out.println("Elemente de calitate A care nu sunt din Transilvania si care nu au productie mai mica de 300:");
+        for (Stupi elemente : _AQuality){
+            if ( (elemente.getPRODUCTIE_MIERE_KG() > 300) && !("Transilvania".equals(elemente.getLOCATIE()))){
+                System.out.println(elemente);
+                }
+            }
+        }
+
+
+    }
