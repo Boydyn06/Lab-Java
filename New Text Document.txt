@@ -11,10 +11,7 @@ public class Main {
         List<Stupi> _AQuality = new ArrayList<>();
         List<Stupi> _BQuality = new ArrayList<>();
         List<Stupi> _CQuality = new ArrayList<>();
-        // modifici doar numele la csv ala din ghilimele
-        String csvFile= "4LF623.csv";
-        String csvSplitBy = ",";
-        String line;
+
 
         try(BufferedReader br = new BufferedReader(new FileReader(csvFile))){
             br.readLine();
